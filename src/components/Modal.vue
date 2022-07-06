@@ -15,30 +15,11 @@ export default {
       const open = document.getElementById("open");
       const modal_container = document.getElementById("modal_container");
       const close = document.getElementById("close");
-
+      modal_container.classList.add("show");
       close.addEventListener("click", () => {
         modal_container.classList.remove("show");
         context.emit("update:showModel", false);
       });
-      
-      let radioBtns = document.querySelectorAll("input[name='category']");
-      let findSelected = () => {
-        let select = document.querySelector(
-          "input[name='category']:checked"
-        ).id;
-        if (select == "others") {
-          console.log("hehe");
-          // showModel.value = true;
-          // context.emit("update:showModel", true);
-          modal_container.classList.add("show");
-          // open.value
-          //  opens.value.classList = 'mlemlem'
-        }
-      };
-      radioBtns.forEach((radioBtn) => {
-        radioBtn.addEventListener("change", findSelected);
-      });
-
     });
   },
 };
