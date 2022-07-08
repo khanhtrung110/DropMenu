@@ -1,31 +1,44 @@
 <template>
   <teleport to="#dropdownModel">
-    <slot></slot>
+    <button ref="opens" id="open">Click me</button>
+    <div ref="modal_containers" class="modal-container" id="modal_container">
+      <slot :handelModelContainer="handelModelContainer">
+        <div class="modal">
+          <h1>Modals Are You</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Reprehenderit beatae illo error sapiente sunt labore quam nemo porro
+            officia nisi.
+          </p>
+          <button @click="handelModelContainer" ref="btnClose" id="close">Close me</button>
+        </div>
+      </slot>
+    </div>
   </teleport>
 </template>
 
 <script>
-import { onMounted } from "@vue/runtime-core";
+import { onMounted, ref } from "@vue/runtime-core";
 export default {
   props: {
     showModel: Boolean,
   },
   setup(props, context) {
+    const modal_containers = ref(null);
+    const btnClose = ref(null);
+    const handelModelContainer = () => {
+      modal_containers.value.classList.remove("show");
+      context.emit("update:showModel", false);
+    };
     onMounted(() => {
-      const open = document.getElementById("open");
-      const modal_container = document.getElementById("modal_container");
-      const close = document.getElementById("close");
-      modal_container.classList.add("show");
-      close.addEventListener("click", () => {
-        modal_container.classList.remove("show");
-        context.emit("update:showModel", false);
-      });
+      modal_containers.value.classList.add("show");
     });
+    return { modal_containers, btnClose, handelModelContainer };
   },
 };
 </script>
 
-<style scope>
+<style >
 #open {
   display: none;
 }

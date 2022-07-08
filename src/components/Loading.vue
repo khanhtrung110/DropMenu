@@ -1,6 +1,7 @@
 <template>
-  <h2>How To Create A Loader</h2>
+<div class="container_loader">
   <div class="loader"></div>
+  </div>
 </template>
 
 <script>
@@ -9,7 +10,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.container_loader{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .loader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
